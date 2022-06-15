@@ -29,7 +29,16 @@ class ContactManagerTest {
     }
 
     @Test
-    @DisplayName("Should Create Contact ONly on MAC")
+    @DisplayName("Should Create Contact on Developer Machine")
+    public void shouldCreateContactOnDEV(){
+        Assumptions.assumeTrue("DEV".equals(System.getProperty("ENV")));
+        contactManager.addContact("Aretha", "Franklin", "0123456789");
+        Assertions.assertFalse(contactManager.getAllContacts().isEmpty());
+        Assertions.assertEquals(1, contactManager.getAllContacts().size());
+    }
+
+    @Test
+    @DisplayName("Should Create Contact Only on MAC")
     @EnabledOnOs(value = OS.MAC,disabledReason = "Should Run only on MAC")
     public void shouldCreateContactOnlyOnMAC(){
         contactManager.addContact("Aretha", "Franklin", "0123456789");
