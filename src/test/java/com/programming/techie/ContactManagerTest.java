@@ -3,6 +3,8 @@ package com.programming.techie;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,6 +35,15 @@ class ContactManagerTest {
     @DisplayName("Repeat Contact Creation Test 5 Times")
     public void shouldTestContactCreationRepeatedly(){
         contactManager.addContact("Aretha", "Franklin", "0123456789");
+        Assertions.assertFalse(contactManager.getAllContacts().isEmpty());
+        Assertions.assertEquals(1, contactManager.getAllContacts().size());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"0123456789", "1234567890", "+0123456789"})
+    @DisplayName("Phone Number should match the required Format")
+    public void shouldTestContactCreationUsingValueSource(String phoneNumber){
+        contactManager.addContact("Aretha", "Franklin", phoneNumber);
         Assertions.assertFalse(contactManager.getAllContacts().isEmpty());
         Assertions.assertEquals(1, contactManager.getAllContacts().size());
     }
