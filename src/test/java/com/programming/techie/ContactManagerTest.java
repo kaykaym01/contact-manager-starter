@@ -48,4 +48,14 @@ class ContactManagerTest {
             contactManager.addContact("Aretha", "Franklin", null);
         });
     }
+
+    @AfterEach
+    public void tearDown(){
+        System.out.println("Should Execute After Each Test");
+    }
+
+    @AfterAll
+    public static void tearDownAll(){
+        System.out.println("Should be executed at the end of the Test");
+    }
 }
