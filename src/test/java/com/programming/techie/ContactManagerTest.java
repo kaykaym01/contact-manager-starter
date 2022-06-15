@@ -4,11 +4,13 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -46,7 +48,7 @@ class ContactManagerTest {
     @ParameterizedTest
     @ValueSource(strings = {"0123456789", "0123456789", "0123456789"})
     @DisplayName("Phone Number should match the required Format")
-    public void shouldTestContactCreationUsingValueSource(String phoneNumber){
+    public void shouldTestPhoneNumberFormatUsingValueSource(String phoneNumber){
         contactManager.addContact("Aretha", "Franklin", phoneNumber);
         Assertions.assertFalse(contactManager.getAllContacts().isEmpty());
         Assertions.assertEquals(1, contactManager.getAllContacts().size());
@@ -58,7 +60,7 @@ class ContactManagerTest {
 
     @ParameterizedTest
     @MethodSource("phoneNumberList")
-    public void shouldTestContactCreationUsingMethodSource(String phoneNumber){
+    public void shouldTestPhoneNumberFormatUsingMethodSource(String phoneNumber){
         contactManager.addContact("Aretha", "Franklin", phoneNumber);
         Assertions.assertFalse(contactManager.getAllContacts().isEmpty());
         Assertions.assertEquals(1, contactManager.getAllContacts().size());
