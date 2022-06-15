@@ -25,4 +25,13 @@ class ContactManagerTest {
             contactManager.addContact(null, "Franklin", "0123456789");
         });
     }
+
+    @Test
+    @DisplayName("Should Not Create Contact When Last Name is Null")
+    public void shouldThrowRuntimeExceptionWhenLastNameIsNull(){
+        ContactManager contactManager = new ContactManager();
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            contactManager.addContact("Aretha", null, "0123456789");
+        });
+    }
 }
